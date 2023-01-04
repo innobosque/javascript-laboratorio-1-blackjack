@@ -22,7 +22,7 @@
     <div class="row container">
         <div class="col">
             <h2>Jugador 1 - <small>0</small></h2>
-            <div id="jugador-cartas">
+            <div class="cartas" id="jugador-cartas">
                 <!-- <img class="carta" src="assets/cartas/10C.png" alt="Carta 10 C"> -->
             </div>
         </div>
@@ -30,7 +30,7 @@
     <div class="row container">
         <div class="col">
             <h2>Compudadora 1 - <small>0</small></h2>
-            <div id="computadora-cartas">
+            <div class="cartas" id="computadora-cartas">
                 <!-- <img class="carta" src="assets/cartas/10H.png" alt="Carta 10 C"> -->
             </div>
         </div>
@@ -39,5 +39,8 @@
     <script type="module" src="/assets/js/juego.js"></script> -->
     <script src="/assets/js/underscore-umd-min.js"></script><!-- UMD stands for Universal Module Definition. -->
     <script src="/assets/js/juego.js"></script>
+    <script>
+        blackJack.init();
+    </script>
 </body>
 </html>

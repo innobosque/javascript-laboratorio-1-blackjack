@@ -1,4 +1,4 @@
-//Patrón módulo
+//Patrón módulo - avaScript Module Design Pattern
 
 const blackJack = (()=>{ //Función anónimo autollada. Creo mi scope. Como no tienen nombre no pueden ser llamadas
     'use strict';
@@ -26,7 +26,10 @@ const blackJack = (()=>{ //Función anónimo autollada. Creo mi scope. Como no t
           btnStopEl =      document.querySelector('#btn-stop-game'),
           btnNewGameEl =   document.querySelector('#btn-new-game');
 
-    
+    /**
+     * Función con la que inicializamos o reiniciamos el juego
+     * @param {number} playersNumber - Número de jugadores. Por escabilidad del programa
+     */
     const initGame = (playersNumber = 1) => {
         console.clear();//limpiamos consola    
         deck = dealCards(); 
@@ -68,11 +71,11 @@ const blackJack = (()=>{ //Función anónimo autollada. Creo mi scope. Como no t
     
     
     /**
-     * Creación de una carta (nodo)
+     * Creación del elemento de una carta (nodo)
      * @param {HTMLElement} rootEl - Elemento de que colgar la imagen creada
      * @param {String} cardValue - Valor de la carta para generar la src de la imagen 
     */
-   const createCards = (rootEl,cardValue = '10C') => {
+   const createCardElement = (rootEl,cardValue = '10C') => {
        const imgEl = document.createElement('img');
        imgEl.classList.add('carta');
        imgEl.src = `assets/cartas/${cardValue}.png`;
@@ -118,7 +121,7 @@ const blackJack = (()=>{ //Función anónimo autollada. Creo mi scope. Como no t
        const computerIndex = points.length - 1;
        do {
            const {card} = askForACardDeck();
-           createCards(cardsEl[computerIndex],card);   
+           createCardElement(cardsEl[computerIndex],card);   
            countPoints(computerIndex,getValueCard(card));
         } while(points[computerIndex] < pointsMinValue && pointsMinValue < 21);
         
@@ -126,15 +129,16 @@ const blackJack = (()=>{ //Función anónimo autollada. Creo mi scope. Como no t
     }
     
     
-    
-    
-    
-    // Enventos 
+    /**
+     * 
+     * EVENTOS
+     * 
+    */  
     btnAskForEl.addEventListener(
         'click',
         ()=>{
             const {card} = askForACardDeck();
-            createCards(cardsEl[0],card);
+            createCardElement(cardsEl[0],card);
             countPoints(0,getValueCard(card));
             
             if(points[0] > 21){
@@ -149,33 +153,33 @@ const blackJack = (()=>{ //Función anónimo autollada. Creo mi scope. Como no t
             }        
             pointsEl[0].textContent = points[0];    
         }
-        );
+    );
         
         
-        btnStopEl.addEventListener(
-            'click',
-            () => {
-                btnAskForEl.disabled = true;
-                btnStopEl.disabled = true;
-                gameComputer(points[0]);
-                if(points[points.length-1] < 22 && points[points.length-1] >= points[0])
-                console.log('Perdiste');
-                else
-                console.warn('Ganaste Genial');
-                
-            }
-            );
+    btnStopEl.addEventListener(
+        'click',
+        () => {
+            btnAskForEl.disabled = true;
+            btnStopEl.disabled = true;
+            gameComputer(points[0]);
+            if(points[points.length-1] < 22 && points[points.length-1] >= points[0])
+            console.log('Perdiste');
+            else
+            console.warn('Ganaste Genial');
             
-            btnNewGameEl.onclick = () => {
-               initGame();
-            }
+        }
+    );
+            
+    btnNewGameEl.onclick = () => {
+        initGame();
+    }
             
             
-            return {
-                init: initGame
-            }
+    return {
+        init: initGame
+    }
             
-        })()
+})()
         
         
         

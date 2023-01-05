@@ -1,4 +1,4 @@
-//Patrón módulo - avaScript Module Design Pattern
+//Patrón módulo - JavaScript Module Design Pattern
 
 const blackJack = (()=>{ //Función anónimo autollada. Creo mi scope. Como no tienen nombre no pueden ser llamadas
     'use strict';
